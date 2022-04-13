@@ -9,12 +9,23 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   @override
-  _MyAppState createState() => _MyAppState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: HomePage(),
+    );
+  }
 }
 
-class _MyAppState extends State<MyApp> {
+class HomePage extends StatefulWidget {
+  const HomePage({Key key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   String contentJson = 'Unknown';
   List<ListData> bleData = List.empty(growable: true);
   Map<String, dynamic> scanResult = Map<String, dynamic>();
@@ -72,42 +83,41 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
-        body: Column(
-          children: [
-            TextButton(
-              onPressed: () async {
-                await BlufiPlugin.instance.scanDeviceInfo().then(
-                      (value) => print(
-                        value.toString(),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Plugin example app'),
+      ),
+      body: Column(
+        children: [
+          TextButton(
+            onPressed: () async {
+              await BlufiPlugin.instance.scanDeviceInfo().then(
+                    (value) => print(
+                      value.toString(),
+                    ),
+                  );
+            },
+            child: Text('Scan'),
+          ),
+          TextButton(
+            onPressed: () async {
+              await BlufiPlugin.instance.stopScan();
+            },
+            child: Text('Stop Scan'),
+          ),
+          TextButton(
+            onPressed: () async {
+              await BlufiPlugin.instance.isConnected().then(
+                    (value) => ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("Connected $value"),
                       ),
-                    );
-              },
-              child: Text('Scan'),
-            ),
-            TextButton(
-              onPressed: () async {
-                await BlufiPlugin.instance.stopScan();
-              },
-              child: Text('Stop Scan'),
-            ),
-            TextButton(
-              onPressed: () async {
-                await BlufiPlugin.instance.isConnected().then(
-                      (value) => ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text("Connected $value}"),
-                        ),
-                      ),
-                    );
-              },
-              child: Text('Check Connection status'),
-            ),
-            /*TextButton(
+                    ),
+                  );
+            },
+            child: Text('Check Connection status'),
+          ),
+          /*TextButton(
                 onPressed: () async {
                   await BlufiPlugin.instance.connectPeripheral(
                       peripheralAddress: scanResult.keys.first);
@@ -134,78 +144,77 @@ class _MyAppState extends State<MyApp> {
               },
               child: Text('Send Custom Data'),
             ),*/
-            Text(contentJson ?? ''),
-            if (bleData.isNotEmpty)
-              Expanded(
-                child: ListView.builder(
-                  itemCount: bleData.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final item = bleData[index];
-                    return ListTile(
-                      leading: Text(item.name ?? ''),
-                      subtitle: Text(item.address ?? ''),
-                      trailing: ElevatedButton(
-                        onPressed: () async {
-                          print("Connecting to ${item.address}");
-                          await BlufiPlugin.instance
-                              .connectPeripheral(
-                                peripheralAddress: item.address,
-                              )
-                              .then(
-                                (value) =>
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                        "Connect $value to ${item.address}"),
-                                  ),
+          Text(contentJson ?? ''),
+          if (bleData.isNotEmpty)
+            Expanded(
+              child: ListView.builder(
+                itemCount: bleData.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final item = bleData[index];
+                  return ListTile(
+                    leading: Text(item.name ?? ''),
+                    subtitle: Text(item.address ?? ''),
+                    trailing: ElevatedButton(
+                      onPressed: () async {
+                        print("Connecting to ${item.address}");
+                        await BlufiPlugin.instance
+                            .connectPeripheral(
+                              peripheralAddress: item.address,
+                            )
+                            .then(
+                              (value) =>
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content:
+                                      Text("Connect $value to ${item.address}"),
                                 ),
-                              );
-                        },
-                        child: Text('Connect'),
+                              ),
+                            );
+                      },
+                      child: Text('Connect'),
+                    ),
+                  );
+                },
+              ),
+            ),
+          if (bleData.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Form(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    TextFormField(
+                      controller: _wifiNameController,
+                      decoration: InputDecoration(
+                        labelText: 'WiFi Name',
                       ),
-                    );
-                  },
+                    ),
+                    TextFormField(
+                      controller: _pwdController,
+                      decoration: InputDecoration(
+                        labelText: 'WiFi Password',
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () async {
+                        await BlufiPlugin.instance.configProvision(
+                          username: _wifiNameController.text.trim(),
+                          password: _pwdController.text.trim(),
+                        );
+                      },
+                      child: Text('Send WiFi Credentials'),
+                    ),
+                    SizedBox(
+                      height: 20.0,
+                    )
+                  ],
                 ),
               ),
-            if (bleData.isNotEmpty)
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Form(
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      TextFormField(
-                        controller: _wifiNameController,
-                        decoration: InputDecoration(
-                          labelText: 'WiFi Name',
-                        ),
-                      ),
-                      TextFormField(
-                        controller: _pwdController,
-                        decoration: InputDecoration(
-                          labelText: 'WiFi Password',
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () async {
-                          await BlufiPlugin.instance.configProvision(
-                            username: _wifiNameController.text.trim(),
-                            password: _pwdController.text.trim(),
-                          );
-                        },
-                        child: Text('Send WiFi Credentials'),
-                      ),
-                      SizedBox(
-                        height: 20.0,
-                      )
-                    ],
-                  ),
-                ),
-              ),
-          ],
-        ),
+            ),
+        ],
       ),
     );
   }
