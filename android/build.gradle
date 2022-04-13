@@ -4,28 +4,30 @@ version '1.0'
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.0'
+        classpath 'com.android.tools.build:gradle:4.1.3'
     }
 }
 
 rootProject.allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
     }
 }
 
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 32
 
     defaultConfig {
         minSdkVersion 21
+        targetSdkVersion 32
     }
     lintOptions {
         disable 'InvalidPackage'
@@ -36,6 +38,6 @@ android {
     }
 }
 
-//dependencies {
-//    implementation project(path: ':blufilibrary')
-//}
+dependencies {
+    implementation 'com.github.EspressifApp:lib-blufi-android:2.3.4'
+}

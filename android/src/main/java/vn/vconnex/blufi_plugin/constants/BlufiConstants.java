@@ -2,7 +2,7 @@ package vn.vconnex.blufi_plugin.constants;
 
 import java.util.UUID;
 
-import vn.vconnex.blufi_plugin.params.BlufiParameter;
+import blufi.espressif.params.BlufiParameter;
 
 
 public final class BlufiConstants {

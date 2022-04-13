@@ -1,6 +1,7 @@
 package vn.vconnex.blufi_plugin;
 
-import vn.vconnex.blufi_plugin.params.BlufiParameter;
+
+import blufi.espressif.params.BlufiParameter;
 
 public class FrameCtrlData {
     private static final int FRAME_CTRL_POSITION_ENCRYPTED = 0;

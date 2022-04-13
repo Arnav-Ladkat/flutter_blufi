@@ -8,8 +8,6 @@ class BlufiPlugin {
   final MethodChannel? _channel = const MethodChannel('blufi_plugin');
   final EventChannel _eventChannel = EventChannel('blufi_plugin/state');
 
-
-
   BlufiPlugin._() {
     _channel!.setMethodCallHandler(null);
 
@@ -36,9 +34,9 @@ class BlufiPlugin {
   }
 
   Future<bool?> scanDeviceInfo({String? filterString}) async {
-   final bool? isEnable = await _channel!.invokeMethod(
+    final bool? isEnable = await _channel!.invokeMethod(
         'scanDeviceInfo', <String, dynamic>{'filter': filterString});
-   return isEnable;
+    return isEnable;
   }
 
   Future stopScan() async {
@@ -78,6 +76,11 @@ class BlufiPlugin {
   Future postCustomData(String dataStr) async {
     await _channel!.invokeMethod(
         'postCustomData', <String, dynamic>{'custom_data': dataStr});
+  }
+
+  Future<bool> isConnected() async {
+    final bool? isConnected = await _channel!.invokeMethod('isConnected');
+    return isConnected ?? false;
   }
 
   speechResultsHandler(dynamic event) {
