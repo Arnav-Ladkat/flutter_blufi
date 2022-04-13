@@ -4,9 +4,21 @@ import 'dart:convert';
 import 'package:blufi_plugin/blufi_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bugfender/flutter_bugfender.dart';
 
 void main() {
-  runApp(MyApp());
+  FlutterBugfender.init(
+    "4AglrhenGCgYEJKG0uCxZMeFPEwyiAdU",
+    enableAndroidLogcatLogging: true,
+  );
+
+  runZonedGuarded(() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    runApp(MyApp());
+  }, (Object error, StackTrace stack) async {
+    FlutterBugfender.error(error);
+    FlutterBugfender.error(stack.toString());
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -52,7 +64,11 @@ class _HomePageState extends State<HomePage> {
               String name = peripheral['name'];
               String rssi = peripheral['rssi'];
               final data = ListData(address, name, rssi);
-              if (!scanResult.containsKey(address)) bleData.add(data);
+              if (!scanResult.containsKey(address)) {
+                bleData.add(data);
+                FlutterBugfender.log(
+                    "Adding Device to list Name: ${data.name} Address:${data.address}");
+              }
               print("Name $name");
               scanResult[address] = name;
             }
@@ -157,19 +173,24 @@ class _HomePageState extends State<HomePage> {
                     trailing: ElevatedButton(
                       onPressed: () async {
                         print("Connecting to ${item.address}");
+                        FlutterBugfender.log(
+                            "Connecting to ${item.name} Address:${item.address}");
                         await BlufiPlugin.instance
                             .connectPeripheral(
-                              peripheralAddress: item.address,
-                            )
+                          peripheralAddress: item.address,
+                        )
                             .then(
-                              (value) =>
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content:
-                                      Text("Connect $value to ${item.address}"),
-                                ),
+                          (value) {
+                            FlutterBugfender.log(
+                                "Connecting value $value of ${item.name} Address:${item.address}");
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content:
+                                    Text("Connect $value to ${item.address}"),
                               ),
                             );
+                          },
+                        );
                       },
                       child: Text('Connect'),
                     ),
@@ -200,9 +221,23 @@ class _HomePageState extends State<HomePage> {
                     ),
                     TextButton(
                       onPressed: () async {
-                        await BlufiPlugin.instance.configProvision(
+                        FlutterBugfender.log(
+                            "Send WiFi Credentials WiFi ${_wifiNameController.text.trim()} pwd:${_pwdController.text.trim()}");
+                        await BlufiPlugin.instance
+                            .configProvision(
                           username: _wifiNameController.text.trim(),
                           password: _pwdController.text.trim(),
+                        )
+                            .then(
+                          (value) {
+                            FlutterBugfender.log(
+                                "Send WiFi Credentials ${value}");
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text("Send WiFi Credentials ${value}"),
+                              ),
+                            );
+                          },
                         );
                       },
                       child: Text('Send WiFi Credentials'),
