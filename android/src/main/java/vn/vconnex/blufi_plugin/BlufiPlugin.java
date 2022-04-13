@@ -98,6 +98,11 @@ public class BlufiPlugin implements FlutterPlugin, ActivityAware, MethodCallHand
 
     private Handler handler;
 
+    private static final int[] OP_MODE_VALUES = {
+            BlufiParameter.OP_MODE_STA,
+            BlufiParameter.OP_MODE_SOFTAP,
+            BlufiParameter.OP_MODE_STASOFTAP
+    };
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -272,7 +277,8 @@ public class BlufiPlugin implements FlutterPlugin, ActivityAware, MethodCallHand
 
     private void configure(String userName, String password) {
         BlufiConfigureParams params = new BlufiConfigureParams();
-        params.setOpMode(1);
+        int deviceMode = OP_MODE_VALUES[0];
+        params.setOpMode(deviceMode);
         byte[] ssidBytes = userName.getBytes();
         params.setStaSSIDBytes(ssidBytes);
         params.setStaPassword(password);
