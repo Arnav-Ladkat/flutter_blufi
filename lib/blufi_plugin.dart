@@ -40,41 +40,41 @@ class BlufiPlugin {
   }
 
   Future stopScan() async {
-    await _channel!.invokeMethod('stopScan');
+    return await _channel!.invokeMethod('stopScan');
   }
 
   Future connectPeripheral({String? peripheralAddress}) async {
-    await _channel!.invokeMethod('connectPeripheral',
+    return await _channel!.invokeMethod('connectPeripheral',
         <String, dynamic>{'peripheral': peripheralAddress});
   }
 
   Future requestCloseConnection() async {
-    await _channel!.invokeMethod('requestCloseConnection');
+    return await _channel!.invokeMethod('requestCloseConnection');
   }
 
   Future negotiateSecurity() async {
-    await _channel!.invokeMethod('negotiateSecurity');
+    return await _channel!.invokeMethod('negotiateSecurity');
   }
 
   Future requestDeviceVersion() async {
-    await _channel!.invokeMethod('requestDeviceVersion');
+    return await _channel!.invokeMethod('requestDeviceVersion');
   }
 
   Future configProvision({String? username, String? password}) async {
-    await _channel!.invokeMethod('configProvision',
+    return await _channel!.invokeMethod('configProvision',
         <String, dynamic>{'username': username, 'password': password});
   }
 
   Future requestDeviceStatus() async {
-    await _channel!.invokeMethod('requestDeviceStatus');
+    return await _channel!.invokeMethod('requestDeviceStatus');
   }
 
   Future requestDeviceScan() async {
-    await _channel!.invokeMethod('requestDeviceScan');
+    return await _channel!.invokeMethod('requestDeviceScan');
   }
 
   Future postCustomData(String dataStr) async {
-    await _channel!.invokeMethod(
+    return await _channel!.invokeMethod(
         'postCustomData', <String, dynamic>{'custom_data': dataStr});
   }
 
