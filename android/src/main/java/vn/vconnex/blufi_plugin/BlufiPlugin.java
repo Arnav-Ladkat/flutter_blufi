@@ -48,15 +48,13 @@ import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
-
-import blufi.espressif.BlufiCallback;
-import blufi.espressif.BlufiClient;
-import blufi.espressif.params.BlufiConfigureParams;
-import blufi.espressif.params.BlufiParameter;
-import blufi.espressif.response.BlufiScanResult;
-import blufi.espressif.response.BlufiStatusResponse;
-import blufi.espressif.response.BlufiVersionResponse;
 import vn.vconnex.blufi_plugin.constants.BlufiConstants;
+import vn.vconnex.blufi_plugin.params.BlufiConfigureParams;
+import vn.vconnex.blufi_plugin.params.BlufiParameter;
+import vn.vconnex.blufi_plugin.response.BlufiScanResult;
+import vn.vconnex.blufi_plugin.response.BlufiStatusResponse;
+import vn.vconnex.blufi_plugin.response.BlufiVersionResponse;
+
 
 /**
  * BlufiPlugin

@@ -38,6 +38,8 @@ android {
     }
 }
 
+/*
 dependencies {
     implementation 'com.github.EspressifApp:lib-blufi-android:2.3.5'
 }
+*/

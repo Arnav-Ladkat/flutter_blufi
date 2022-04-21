@@ -7,8 +7,10 @@
     <list default="true" id="b4233614-2244-477f-9efb-facfedc95fc3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/java/vn/vconnex/blufi_plugin/BlufiPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/vn/vconnex/blufi_plugin/BlufiPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/java/vn/vconnex/blufi_plugin/FrameCtrlData.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/vn/vconnex/blufi_plugin/FrameCtrlData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/java/vn/vconnex/blufi_plugin/constants/BlufiConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/vn/vconnex/blufi_plugin/constants/BlufiConstants.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
