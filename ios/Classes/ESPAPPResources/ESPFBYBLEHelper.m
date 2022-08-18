@@ -43,7 +43,7 @@
 
 - (void)startScan:(FBYBleDeviceBackBlock)device {
     
-    NSLog(@"扫描设备");
+    NSLog(@"scan device");
     _bleScanSuccessBlock = device;
     if (self.peripheralState ==  CBManagerStatePoweredOn)
     {
@@ -73,37 +73,37 @@
 {
     switch (central.state) {
         case CBManagerStateUnknown:{
-            NSLog(@"未知状态");
+            NSLog(@"Unknown status");
             self.peripheralState = central.state;
         }
             break;
         case CBManagerStateResetting:
         {
-            NSLog(@"重置状态");
+            NSLog(@"reset state");
             self.peripheralState = central.state;
         }
             break;
         case CBManagerStateUnsupported:
         {
-            NSLog(@"不支持的状态");
+            NSLog(@"unsupported state");
             self.peripheralState = central.state;
         }
             break;
         case CBManagerStateUnauthorized:
         {
-            NSLog(@"未授权的状态");
+            NSLog(@"Unauthorized state");
             self.peripheralState = central.state;
         }
             break;
         case CBManagerStatePoweredOff:
         {
-            NSLog(@"关闭状态");
+            NSLog(@"Disabled");
             self.peripheralState = central.state;
         }
             break;
         case CBManagerStatePoweredOn:
         {
-            NSLog(@"开启状态－可用状态");
+            NSLog(@"On state - available state");
             self.peripheralState = central.state;
             NSLog(@"%ld",(long)self.peripheralState);
             [self.centralManager scanForPeripheralsWithServices:nil options:nil];

@@ -24,11 +24,11 @@
 + (BOOL)fby_saveNSUserDefaults:(id)value withKey:(NSString *)key
 {
     if((!value)||(!key)||key.length==0){
-        NSLog(@"参数不能为空");
+        NSLog(@"parameter cannot be empty");
         return NO;
     }
     if(!([value isKindOfClass:[NSString class]]||[value isKindOfClass:[NSNumber class]]||[value isKindOfClass:[NSArray class]]||[value isKindOfClass:[NSDictionary class]])){
-        NSLog(@"参数格式不对");
+        NSLog(@"wrong parameter format");
         return NO;
     }
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -45,7 +45,7 @@
  */
 + (id)fby_getNSUserDefaults:(NSString *)key{
     if(key==nil||key.length==0){
-        NSLog(@"参数不能为空");
+        NSLog(@"parameter cannot be empty");
         return nil;
     }
     NSUserDefaults *version = [NSUserDefaults standardUserDefaults];
