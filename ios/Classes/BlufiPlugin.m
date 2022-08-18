@@ -124,10 +124,10 @@
     }
 }
 
--(void)postCustomData:(NSString *) data {
+-(void)postCustomData:(FlutterStandardTypedData typedDataWithBytes *) data {
     
     if (_blufiClient && data != nil) {
-        [_blufiClient postCustomData:[data dataUsingEncoding:NSUTF8StringEncoding]];
+        [_blufiClient postCustomData:[data]];
     }
 }
 
