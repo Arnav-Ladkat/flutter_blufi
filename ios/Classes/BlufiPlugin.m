@@ -124,10 +124,10 @@
     }
 }
 
--(void)postCustomData:(FlutterStandardTypedData typedDataWithBytes *) data {
-    
+-(void)postCustomData:(FlutterStandardTypedData*) data {
     if (_blufiClient && data != nil) {
-        [_blufiClient postCustomData:[data]];
+        
+        [_blufiClient postCustomData:  data];
     }
 }
 
@@ -321,7 +321,7 @@
         [self requestDeviceScan];
     }
     else if ([@"postCustomData" isEqualToString:call.method]) {
-        NSString *customData = call.arguments[@"custom_data"];
+        FlutterStandardTypedData *customData = call.arguments[@"custom_data"];
         [self postCustomData:customData];
     }
   else {
