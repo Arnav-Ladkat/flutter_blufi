@@ -126,8 +126,8 @@
 
 -(void)postCustomData:(FlutterStandardTypedData*) data {
     if (_blufiClient && data != nil) {
-        
-        [_blufiClient postCustomData:  data];
+        NSData *d = [data data];
+        [_blufiClient postCustomData:  d];
     }
 }
 
