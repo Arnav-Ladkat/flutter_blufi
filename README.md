@@ -1,6 +1,8 @@
 # blufi_plugin
 
 EspBlufi plugin, use two library
+Inspired from work done by [dhruvanb](https://github.com/dhruvanb/FlutterBlufi)
+
 
 iOS: https://github.com/EspressifApp/EspBlufiForiOS
 Android: https://github.com/EspressifApp/EspBlufiForAndroid
