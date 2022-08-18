@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:flutter/services.dart';
 
@@ -73,7 +74,7 @@ class BlufiPlugin {
     return await _channel!.invokeMethod('requestDeviceScan');
   }
 
-  Future postCustomData(String dataStr) async {
+  Future postCustomData(Uint8List dataStr) async {
     return await _channel!.invokeMethod(
         'postCustomData', <String, dynamic>{'custom_data': dataStr});
   }
